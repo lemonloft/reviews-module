@@ -27,9 +27,9 @@ const Review = sequelize.define('reviews', {
     primaryKey: true,
     autoIncrement: true
   },
-  // 'userId': {
-  //   type: Sequelize.INTEGER,
-  // },
+  'userId': {
+    type: Sequelize.INTEGER,
+  },
   'date': {
     type: Sequelize.DATE,
   },
@@ -72,9 +72,9 @@ const Review = sequelize.define('reviews', {
   'spaCle': {
     type: Sequelize.BOOLEAN,
   }, 
-  // 'hostId': {
-  //   type: Sequelize.INTEGER,
-  // }, 
+  'hostId': {
+    type: Sequelize.INTEGER,
+  }, 
   'hostRes': {
     type: Sequelize.STRING(5000),
   },
@@ -101,7 +101,7 @@ const User = sequelize.define('users', {
   // options
 });
 
-Review.belongsTo(User);
+// Review.belongsTo(User);
 
 const Host = sequelize.define('hosts', {
   '_id': {
@@ -119,9 +119,9 @@ const Host = sequelize.define('hosts', {
   // options
 });
 
-Host.hasMany(Review);
+// Host.hasMany(Review);
 
-module.exports.db = sequelize;
+// module.exports.db = sequelize;
 module.exports.Review = Review;
 module.exports.User = User; 
 module.exports.Host = Host; 
