@@ -14,7 +14,6 @@ for (let i = 1; i <= 500; i++) {
     userData.image = userimage;
 
     userArray.push(userData);
-    // User.create(userData);
 }
 
 var hostArray = [];
@@ -26,16 +25,16 @@ for (let i = 1; i <= 100; i++) {
     hostData.hostImage = hostImage;
 
     hostArray.push(hostData);
-    // Host.create(hostData);
 }
 
 var reviewsArray = [];
-for (let i = 1; i <= 100; i++) { // host 1 to 100
+for (let i = 1; i <= 100; i++) {
     var selected = [];
     var numbReviews = Math.ceil(Math.random() * 100);
     for (let j = 0; j <= numbReviews; j++) {
         var userId = Math.ceil(Math.random() * 500);
-        if (selected.indexOf(userId)) {
+        console.log(userId);
+        if (selected.indexOf(userId) !== (-1)) {
             continue;
         } else {
             selected.push(userId);
@@ -46,7 +45,7 @@ for (let i = 1; i <= 100; i++) { // host 1 to 100
         var obj = {
             userId: userId,
             date: date,
-            body: faker.lorem.paragraph,
+            body: faker.lorem.paragraph(),
             rating: Math.floor(Math.random() * 6),
             cleanliness: Math.floor(Math.random() * 6),
             communication: Math.floor(Math.random() * 6),
@@ -60,7 +59,7 @@ for (let i = 1; i <= 100; i++) { // host 1 to 100
             stySpa: Math.random() >= 0.5,
             spaCle: Math.random() >= 0.5,
             hostId: i,
-            hostRes: faker.lorem.paragraph,
+            hostRes: faker.lorem.paragraph(),
             hostResDate: hostResDate,
         }
         reviewsArray.push(obj);
@@ -74,6 +73,7 @@ User.bulkCreate(userArray)
         console.log('Hosts data generated!');
     })
     .then(() => {
+        console.log(reviewsArray);
         Review.bulkCreate(reviewsArray);
         console.log('Reviews data generated!');
     });

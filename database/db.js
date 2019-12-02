@@ -82,7 +82,7 @@ const Review = sequelize.define('reviews', {
     type: Sequelize.DATE,
   },
 }, {
-  // options
+  timestamps: false
 });
 
 const User = sequelize.define('users', {
@@ -98,7 +98,7 @@ const User = sequelize.define('users', {
     type: Sequelize.STRING(100)
   }
 }, {
-  // options
+  timestamps: false
 });
 
 // Review.belongsTo(User);
@@ -116,7 +116,7 @@ const Host = sequelize.define('hosts', {
     type: Sequelize.STRING(100)
   }
 }, {
-  // options
+  timestamps: false
 });
 
 // Host.hasMany(Review);
