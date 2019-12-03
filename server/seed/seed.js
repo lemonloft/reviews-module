@@ -33,12 +33,12 @@ for (let i = 1; i <= 100; i++) {
     var numbReviews = Math.ceil(Math.random() * 100);
     for (let j = 0; j <= numbReviews; j++) {
         var userId = Math.ceil(Math.random() * 500);
-        console.log(userId);
         if (selected.indexOf(userId) !== (-1)) {
             continue;
         } else {
             selected.push(userId);
         }
+        var hostRes = Math.random() >= 0.5;
         var date = faker.date.recent(100);
         var now = new Date();
         var hostResDate = faker.date.between(date, now);
@@ -46,21 +46,24 @@ for (let i = 1; i <= 100; i++) {
             userId: userId,
             date: date,
             body: faker.lorem.paragraph(),
-            rating: Math.floor(Math.random() * 6),
-            cleanliness: Math.floor(Math.random() * 6),
-            communication: Math.floor(Math.random() * 6),
-            checkin: Math.floor(Math.random() * 6),
-            accuracy: Math.floor(Math.random() * 6),
-            location: Math.floor(Math.random() * 6),
-            value: Math.floor(Math.random() * 6),
-            quiRes: Math.random() >= 0.5,
-            outHos: Math.random() >= 0.5,
-            amaAme: Math.random() >= 0.5,
-            stySpa: Math.random() >= 0.5,
-            spaCle: Math.random() >= 0.5,
+            // Math.random() * (max - min) + min
+            rating: Math.floor(Math.random() * 3 + 3),
+            cleanliness: Math.floor(Math.random() * 3 + 3),
+            communication: Math.floor(Math.random() * 3 + 3),
+            checkin: Math.floor(Math.random() * 3 + 3),
+            accuracy: Math.floor(Math.random() * 3 + 3),
+            location: Math.floor(Math.random() * 3 + 3),
+            value: Math.floor(Math.random() * 3 + 3),
+            quiRes: Math.random() >= 0.3,
+            outHos: Math.random() >= 0.3,
+            amaAme: Math.random() >= 0.3,
+            stySpa: Math.random() >= 0.3,
+            spaCle: Math.random() >= 0.3,
             hostId: i,
-            hostRes: faker.lorem.paragraph(),
-            hostResDate: hostResDate,
+            // hostRes: faker.lorem.paragraph(),
+            // hostResDate: hostResDate,
+            hostRes: hostRes? faker.lorem.paragraph() : null,
+            hostResDate: hostRes? hostResDate : null,
         }
         reviewsArray.push(obj);
     }

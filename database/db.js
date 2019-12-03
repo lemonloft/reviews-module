@@ -118,6 +118,22 @@ const Host = sequelize.define('hosts', {
   timestamps: false
 });
 
+module.exports = {
+  getReviews: (callback, data) => {
+    // sequelize.query(`SELECT * FROM reviews WHERE hostId = 1`)
+    sequelize.query(`SELECT * FROM reviews
+      INNER JOIN hosts ON hosts._id = reviews.hostId
+      INNER JOIN users ON users._id = reviews.userId
+      WHERE hostId = 1 ORDER BY reviews.date DESC`)
+    .then(data => {
+      callback(null, data);
+    })
+    .catch(err => {
+      console.log('There was an error getting review data: ', err);
+    });
+  }
+}
+
 // Host.hasMany(Review);
 
 // module.exports.db = sequelize;
