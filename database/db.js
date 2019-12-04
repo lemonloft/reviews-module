@@ -119,12 +119,15 @@ const Host = sequelize.define('hosts', {
 });
 
 module.exports = {
-  getReviews: (callback, data) => {
+  getReviews: (hostId, callback) => {
     // sequelize.query(`SELECT * FROM reviews WHERE hostId = 1`)
+    if (!hostId) {
+      hostId = 1;
+    }
     sequelize.query(`SELECT * FROM reviews
       INNER JOIN hosts ON hosts._id = reviews.hostId
       INNER JOIN users ON users._id = reviews.userId
-      WHERE hostId = 1 ORDER BY reviews.date DESC`)
+      WHERE hostId = `+ hostId + ` ORDER BY reviews.date DESC`)
     .then(data => {
       callback(null, data);
     })
