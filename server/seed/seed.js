@@ -1,48 +1,44 @@
-var faker = require('faker');
+const faker = require('faker');
+const { Review } = require('../../database/db.js');
+const { User } = require('../../database/db.js');
+const { Host } = require('../../database/db.js');
 
-// const db = require('../../database/db.js').db;
-const Review = require('../../database/db.js').Review;
-const User = require('../../database/db.js').User;
-const Host = require('../../database/db.js').Host;
-
-var userArray = [];
-for (let i = 1; i <= 500; i++) {
-    var userData = {};
-    var userName = faker.name.firstName();
-    var userimage = faker.image.avatar();
-    userData.name = userName;
-    userData.image = userimage;
-
-    userArray.push(userData);
+const userArray = [];
+for (let i = 1; i <= 500; i += 1) {
+  var userData = {};
+  var userName = faker.name.firstName();
+  var userimage = faker.image.avatar();
+  userData.name = userName;
+  userData.image = userimage;
+  userArray.push(userData);
 }
 
-var hostArray = [];
-for (let i = 1; i <= 100; i++) {
-    var hostData = {};
-    var hostName = faker.name.firstName();
-    var hostImage = faker.image.avatar();
-    hostData.hostName = hostName;
-    hostData.hostImage = hostImage;
-
-    hostArray.push(hostData);
+const hostArray = [];
+for (let i = 1; i <= 100; i += 1) {
+  var hostData = {};
+  var hostName = faker.name.firstName();
+  var hostImage = faker.image.avatar();
+  hostData.hostName = hostName;
+  hostData.hostImage = hostImage;
+  hostArray.push(hostData);
 }
 
-var reviewsArray = [];
+const reviewsArray = [];
 for (let i = 1; i <= 100; i++) {
-    var selected = [];
-    var numbReviews = Math.ceil(Math.random() * 100);
-    for (let j = 0; j <= numbReviews; j++) {
-        var userId = Math.ceil(Math.random() * 500);
-        if (selected.indexOf(userId) !== (-1)) {
-            continue;
-        } else {
-            selected.push(userId);
-        }
-        var hostRes = Math.random() >= 0.5;
-        var date = faker.date.recent(100);
-        var now = new Date();
-        var hostResDate = faker.date.between(date, now);
-        var obj = {
+  var selected = [];
+  var numbReviews = Math.ceil(Math.random() * 100);
+  for (let j = 0; j <= numbReviews; j++) {
+    var userId = Math.ceil(Math.random() * 500);
+    if (selected.indexOf(userId) !== (-1)) {
+      continue;
+    } else {
+      selected.push(userId);
+    }
+    var hostRes = Math.random() >= 0.5;
+    var date = faker.date.recent(100);
+    var now = new Date();
+    var hostResDate = faker.date.between(date, now);
+    var obj = {
             userId: userId,
             date: date,
             body: faker.lorem.paragraph(),
@@ -64,19 +60,19 @@ for (let i = 1; i <= 100; i++) {
             // hostResDate: hostResDate,
             hostRes: hostRes? faker.lorem.paragraph() : null,
             hostResDate: hostRes? hostResDate : null,
-        }
+    }
         reviewsArray.push(obj);
     }
 }
 
 User.bulkCreate(userArray)
-    .then(() => {
-        console.log('Users data generated!');
-        Host.bulkCreate(hostArray);
-        console.log('Hosts data generated!');
-    })
-    .then(() => {
-        console.log(reviewsArray);
-        Review.bulkCreate(reviewsArray);
-        console.log('Reviews data generated!');
-    });
+  .then(() => {
+    console.log('Users data generated!');
+    Host.bulkCreate(hostArray);
+    console.log('Hosts data generated!');
+  })
+  .then(() => {
+    console.log(reviewsArray);
+    Review.bulkCreate(reviewsArray);
+    console.log('Reviews data generated!');
+  });

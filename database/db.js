@@ -7,8 +7,8 @@ const sequelize = new Sequelize('LemonLoft', 'loftuser', 'password', {
     max: 5,
     min: 0,
     acquire: 30000,
-    idle: 10000
-  }
+    idle: 10000,
+  },
 });
 
 sequelize
@@ -16,130 +16,126 @@ sequelize
   .then(() => {
     console.log('Connection has been established successfully.');
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('Unable to connect to the database:', err);
   });
 
 const Review = sequelize.define('reviews', {
-  '_id': {
+  _id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  'userId': {
+  userId: {
     type: Sequelize.INTEGER,
   },
-  'date': {
+  date: {
     type: Sequelize.DATE,
   },
-  'body': {
+  body: {
     type: Sequelize.STRING(5000),
   },
-  'rating': {
+  rating: {
     type: Sequelize.INTEGER,
   },
-  'cleanliness': {
+  cleanliness: {
     type: Sequelize.INTEGER,
   },
-  'communication': {
+  communication: {
     type: Sequelize.INTEGER,
   },
-  'checkin': {
+  checkin: {
     type: Sequelize.INTEGER,
   },
-  'accuracy': {
+  accuracy: {
     type: Sequelize.INTEGER,
   },
-  'location': {
+  location: {
     type: Sequelize.INTEGER,
   },
-  'value': {
+  value: {
     type: Sequelize.INTEGER,
-  }, 
-  'quiRes': {
+  },
+  quiRes: {
     type: Sequelize.BOOLEAN,
-  }, 
-  'outHos': {
+  },
+  outHos: {
     type: Sequelize.BOOLEAN,
-  }, 
-  'amaAme': {
+  },
+  amaAme: {
     type: Sequelize.BOOLEAN,
-  }, 
-  'stySpa': {
+  },
+  stySpa: {
     type: Sequelize.BOOLEAN,
-  }, 
-  'spaCle': {
+  },
+  spaCle: {
     type: Sequelize.BOOLEAN,
-  }, 
-  'hostId': {
+  },
+  hostId: {
     type: Sequelize.INTEGER,
-  }, 
-  'hostRes': {
+  },
+  hostRes: {
     type: Sequelize.STRING(5000),
   },
-  'hostResDate': {
+  hostResDate: {
     type: Sequelize.DATE,
   },
 }, {
-  timestamps: false
+  timestamps: false,
 });
 
 const User = sequelize.define('users', {
-  '_id': {
+  _id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  'name': {
-    type: Sequelize.STRING(40)
+  name: {
+    type: Sequelize.STRING(40),
   },
-  'image': {
-    type: Sequelize.STRING(100)
-  }
+  image: {
+    type: Sequelize.STRING(100),
+  },
 }, {
-  timestamps: false
+  timestamps: false,
 });
 
-// Review.belongsTo(User);
-
 const Host = sequelize.define('hosts', {
-  '_id': {
+  _id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
-  'hostName': {
-    type: Sequelize.STRING(40)
+  hostName: {
+    type: Sequelize.STRING(40),
   },
-  'hostImage': {
-    type: Sequelize.STRING(100)
-  }
+  hostImage: {
+    type: Sequelize.STRING(100),
+  },
 }, {
-  timestamps: false
+  timestamps: false,
 });
 
 module.exports = {
   getReviews: (hostId, callback) => {
+    let hostIdSQL = hostId;
     // sequelize.query(`SELECT * FROM reviews WHERE hostId = 1`)
     if (!hostId) {
-      hostId = 1;
+      hostIdSQL = 1;
     }
     sequelize.query(`SELECT * FROM reviews
       INNER JOIN hosts ON hosts._id = reviews.hostId
       INNER JOIN users ON users._id = reviews.userId
-      WHERE hostId = `+ hostId + ` ORDER BY reviews.date DESC`)
-    .then(data => {
-      callback(null, data);
-    })
-    .catch(err => {
-      console.log('There was an error getting review data: ', err);
-    });
-  }
-}
+      WHERE hostId = ${hostIdSQL} ORDER BY reviews.date DESC`)
+      .then((data) => {
+        callback(null, data);
+      })
+      .catch((err) => {
+        console.log('There was an error getting review data: ', err);
+      });
+  },
+};
 
-// Host.hasMany(Review);
-
-// module.exports.db = sequelize;
 module.exports.Review = Review;
-module.exports.User = User; 
-module.exports.Host = Host; 
+module.exports.User = User;
+module.exports.Host = Host;
