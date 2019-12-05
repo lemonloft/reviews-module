@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Reviews /> should not return an error 1`] = `ShallowWrapper {}`;
+
+exports[`Test App component using mount should not return an error 1`] = `ReactWrapper {}`;
+
+exports[`Test App component using shallow should not return an error 1`] = `ShallowWrapper {}`;
+
+exports[`it App component using mount should not return an error 1`] = `ReactWrapper {}`;
+
+exports[`it App component using shallow should not return an error 1`] = `ShallowWrapper {}`;
