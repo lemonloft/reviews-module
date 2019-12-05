@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "build": "webpack -w -d",
-    "server": "nodemon ./server/server.js",
+    "server": "nodemon ./server/start.js",
     "db:setup": "node server/seed/seed.js"
   },
   "repository": {
@@ -22,19 +22,35 @@
   "homepage": "https://github.com/lemonloft/reviews-module#readme",
   "devDependencies": {
     "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
+    "@types/jest": "^24.0.23",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.9.0",
     "nodemon": "^2.0.1",
+    "supertest": "^4.0.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "express": "^4.17.1",
     "faker": "^4.1.0",
+    "jquery": "^3.4.1",
     "mysql2": "^2.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "sequelize": "^5.21.2"
+    "sequelize": "^5.21.2",
+    "styled-components": "^4.4.1"
   }
 }

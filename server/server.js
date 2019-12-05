@@ -1,11 +1,18 @@
 const express = require('express');
-const app = express();
-const port = 3000;
 const path = require('path');
+const controller = require('./controllers');
 
-app.use("/", express.static(path.join(__dirname, '../public')));
+const app = express();
 
+app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/:hostId', express.static(path.join(__dirname, '../public')));
 
-app.listen(port, () => {
-  console.log('we be arriving at port '+ port);
-})
+app.get('/api/reviews', (req, res) => {
+  controller.reviews.get(req, res);
+});
+
+app.get('/api/reviews/:hostId', (req, res) => {
+  controller.reviews.get(req, res);
+});
+
+module.exports = app;
