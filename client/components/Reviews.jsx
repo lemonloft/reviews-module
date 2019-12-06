@@ -27,6 +27,7 @@ flex-direction: row;
 const VerticalTest = styled.div`
 display: flex;
 flex-direction: column;
+margin-left: 15px;
 
 justify-content: center;
 `
@@ -50,23 +51,33 @@ class Reviews extends React.Component {
   render() {
     return (
       <Body>
-        <h2>Reviews</h2>
         {this.props.data.map((data) => (
           <Review key={data._id}>
             <HorizontalTest>
                 <a href="/">
-                    <Avatar src={data.image} height='48px' width='48px' />
+                    <Avatar src={data.image} height='40px' width='40px' />
                 </a>
                 <VerticalTest>
-                  <div>{data.name}</div>
+                  <div><b>{data.name}</b></div>
                   <span>{this.getProperDate(data.date)}</span>
                 </VerticalTest>
             </HorizontalTest>
             <ReviewText>
                 <span>
-                    {data.body}
+                {data.body.length <= 275 &&
+                    data.body
+                }
+                {data.body.length > 275 &&
+                    (()=>{
+                        data.body.slice(0,275) + data.body.slice(275).split(' ')[0];
+                        data.body.slice(275).split(' ').slice(1).join(' ');
+                    return data.body.slice(0,275) + data.body.slice(275).split(' ')[0];
+                  })()
+                }
+                {data.body.length > 275 &&
+                    <button>button</button>
+                }
                 </span>
-                <button>read more</button>
             </ReviewText>
           </Review>
         ))}

@@ -35,13 +35,14 @@ for (let i = 1; i <= 100; i++) {
       selected.push(userId);
     }
     var hostRes = Math.random() >= 0.5;
+    var longRev = Math.random() <= 0.25;
     var date = faker.date.recent(100);
     var now = new Date();
     var hostResDate = faker.date.between(date, now);
     var obj = {
             userId: userId,
             date: date,
-            body: faker.lorem.paragraph(),
+            body: longRev ? faker.lorem.paragraph() + ' ' + faker.lorem.paragraph() : faker.lorem.paragraph(),
             // Math.random() * (max - min) + min
             rating: Math.floor(Math.random() * 3 + 3),
             cleanliness: Math.floor(Math.random() * 3 + 3),
@@ -58,8 +59,8 @@ for (let i = 1; i <= 100; i++) {
             hostId: i,
             // hostRes: faker.lorem.paragraph(),
             // hostResDate: hostResDate,
-            hostRes: hostRes? faker.lorem.paragraph() : null,
-            hostResDate: hostRes? hostResDate : null,
+            hostRes: hostRes ? faker.lorem.paragraph() : null,
+            hostResDate: hostRes ? hostResDate : null,
     }
         reviewsArray.push(obj);
     }

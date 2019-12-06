@@ -3,6 +3,8 @@ import { ajax } from 'jquery';
 import Reviews from './components/Reviews.jsx';
 import StaticRating from './components/StaticRating.jsx';
 import StaticVote from './components/StaticVote.jsx';
+import Search from './components/Search.jsx';
+import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import styled from 'styled-components';
 
@@ -18,13 +20,29 @@ height: 275px;
 
 border-style: solid;
 border-width: 1px;
-border-radius: 5px;
+border-radius: 12px;
 border-color: #BEBEBE;
 `;
 
-const Line = styled.div`
+const ReviewsHeader = styled.h3`
+display: flex;
+`;
+
+const HorLine = styled.div`
   width: 544px;
   border-bottom: 1px solid #BEBEBE;
+`;
+
+const VerLine = styled.div`
+  height: 20px;
+  border-left: 1px solid #BEBEBE;
+  margin-right: 15px;
+`;
+
+const FlexSpan = styled.span`
+display: flex;
+flex-direction: row;
+margin-right: 15px;
 `;
 
 class App extends React.Component {
@@ -107,15 +125,27 @@ class App extends React.Component {
     if (this.state.staticData) {
       return (
         <Body>
-          <h2>
-            <span><IoIosStar value={{ color: 'blue' }}/></span>
-            {this.state.staticData.ratings[0]} ({this.state.data.length} reviews)
-          </h2>
+          <h2>Reviews</h2>
+
+          <ReviewsHeader>
+            <FlexSpan>
+              <IconContext.Provider value={{ color: "#378187"}}>
+                <IoIosStar />
+              </IconContext.Provider>
+              <div>{this.state.staticData.ratings[0]} </div>
+            </FlexSpan>
+            <VerLine />
+            <div>{this.state.data.length} reviews</div>
+          </ReviewsHeader>
+
           <Container>
             <StaticRating staticData={this.state.staticData} />
-            <Line />
+            <HorLine />
             <StaticVote staticData={this.state.staticData} />
           </Container>
+
+          <Search />
+
           <Reviews data={this.state.data} staticData={this.state.staticData} />
         </Body>
       );
