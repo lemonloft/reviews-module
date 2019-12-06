@@ -1,58 +1,78 @@
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 
+const Avatar = styled.img`
+border-radius: 50%;
+`
+
 const Body = styled.div`
-font-family: circular, Roboto, "Helvetica Neue", sans-serif;
+display: flex;
+flex-direction: column;
 `;
 
 const Review = styled.div`
-margin-top: 24px; 
 margin-bottom: 24px;
 `;
 
+const ReviewText = styled.div`
+width: 594px;
+`
+
+const HorizontalTest = styled.div`
+display: flex;
+flex-direction: row;
+`
+
+const VerticalTest = styled.div`
+display: flex;
+flex-direction: column;
+
+justify-content: center;
+`
+
 class Reviews extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    getProperDate(dateString) {
-        var monthNames = [
-            "", "January", "February", "March",
-            "April", "May", "June", "July",
-            "August", "September", "October",
-            "November", "December"
-        ];
-        var date = new Date(dateString);
-        return monthNames[date.getMonth()] + ' ' + date.getFullYear();
-    }
+  getProperDate(dateString) {
+    const monthNames = [
+      '', 'January', 'February', 'March',
+      'April', 'May', 'June', 'July',
+      'August', 'September', 'October',
+      'November', 'December',
+    ];
+    const date = new Date(dateString);
+    return `${monthNames[date.getMonth()] } ${date.getFullYear()}`;
+  }
 
-    render() {
-
-        return (
-            <Body>
-                <div>Reviews</div>
-                {this.props.allState.data.map((data) =>{
-                    return (
-                        <Review key={data._id}>
-                            <div>
-                                <a href="/">
-                                    <img src={data.image} height="40" width="40"></img>
-                                </a>
-                                {data.name}
-                                <div>{this.getProperDate(data.date)}</div>
-                            </div>
-                            <div>
-                                <span>
-                                    {data.body}
-                                </span>
-                                <button>read more</button>
-                            </div>
-                        </Review>
-                    );}
-                )}
-            </Body>
-        );
-    }
+  render() {
+    return (
+      <Body>
+        <h2>Reviews</h2>
+        {this.props.data.map((data) => (
+          <Review key={data._id}>
+            <HorizontalTest>
+                <a href="/">
+                    <Avatar src={data.image} height='48px' width='48px' />
+                </a>
+                <VerticalTest>
+                  <div>{data.name}</div>
+                  <span>{this.getProperDate(data.date)}</span>
+                </VerticalTest>
+            </HorizontalTest>
+            <ReviewText>
+                <span>
+                    {data.body}
+                </span>
+                <button>read more</button>
+            </ReviewText>
+          </Review>
+        ))}
+      </Body>
+    );
+  }
 }
 
 // p{font-family:"Times New Roman", Times, serif;}
