@@ -32,9 +32,24 @@ margin-left: 15px;
 justify-content: center;
 `
 
+const ReviewButton = styled.button`
+outline:none;
+border:none;
+color: #378187;
+font-size: 16px;
+padding: 0;
+font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+:hover {
+    text-decoration: underline;
+}
+`
+
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+        isClicked: this.props.data.map((data) => {return false}),
+    };
   }
 
   getProperDate(dateString) {
@@ -48,10 +63,23 @@ class Reviews extends React.Component {
     return `${monthNames[date.getMonth()] } ${date.getFullYear()}`;
   }
 
+  changeReadmoreStatus(e, index) {
+    let oldIsClicked = this.state.isClicked.slice();
+    let newIsClicked = oldIsClicked.map((data, i) => {
+        if (i === index) {
+            return true;
+        }
+        return data;
+    })
+    this.setState({
+        isClicked: newIsClicked,
+    });
+  }
+
   render() {
     return (
       <Body>
-        {this.props.data.map((data) => (
+        {this.props.data.map((data, index) => (
           <Review key={data._id}>
             <HorizontalTest>
                 <a href="/">
@@ -69,13 +97,13 @@ class Reviews extends React.Component {
                 }
                 {data.body.length > 275 &&
                     (()=>{
-                        data.body.slice(0,275) + data.body.slice(275).split(' ')[0];
-                        data.body.slice(275).split(' ').slice(1).join(' ');
-                    return data.body.slice(0,275) + data.body.slice(275).split(' ')[0];
+                        // data.body.slice(0,275) + data.body.slice(275).split(' ')[0];
+                        // data.body.slice(275).split(' ').slice(1).join(' ');
+                    return (this.state.isClicked[index] ? data.body.slice(0,275) + data.body.slice(275).split(' ')[0] : data.body.slice(0,275) + data.body.slice(275).split(' ')[0] + '...')
                   })()
                 }
                 {data.body.length > 275 &&
-                    <button>button</button>
+                    (this.state.isClicked[index] ? (' ' + data.body.slice(275).split(' ').slice(1).join(' ')) : (<ReviewButton onClick={(e)=>{this.changeReadmoreStatus(e, index)}}>Read more</ReviewButton>))
                 }
                 </span>
             </ReviewText>

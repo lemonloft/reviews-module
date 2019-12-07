@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.ul`
-margin: auto;
-
+margin-top: 30px;
 width: 544px;
 height: 90px;
+padding: 0;
 
 display: grid;
 grid-template-columns: 50% 50%;
+grid-template-rows: 1fr 1fr 1fr;
 `;
 
 const List = styled.li`

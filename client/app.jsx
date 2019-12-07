@@ -1,15 +1,15 @@
 import React from 'react';
 import { ajax } from 'jquery';
+import { IconContext } from "react-icons";
+import { IoIosStar } from "react-icons/io";
+import styled from 'styled-components';
 import Reviews from './components/Reviews.jsx';
 import StaticRating from './components/StaticRating.jsx';
 import StaticVote from './components/StaticVote.jsx';
 import Search from './components/Search.jsx';
-import { IconContext } from "react-icons";
-import { IoIosStar } from "react-icons/io";
-import styled from 'styled-components';
 
 const Body = styled.div`
-font-family: circular, Roboto, "Helvetica Neue", sans-serif;
+font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 `;
 
 const Container = styled.ul`
@@ -22,6 +22,7 @@ border-style: solid;
 border-width: 1px;
 border-radius: 12px;
 border-color: #BEBEBE;
+margin-left: 0px;
 `;
 
 const ReviewsHeader = styled.h3`
@@ -50,11 +51,40 @@ class App extends React.Component {
     super(props);
     this.state = {
       data: [],
+      searchBool: false,
     };
   }
 
   componentDidMount() {
     this.renderView();
+  }
+
+  handleSearchChange(e) {
+    e.preventDefault();
+    if (!this.state.searchBool) {
+      let originalList = this.state.data.slice();
+      let newList = this.state.data.filter(data => data.body.toLowerCase().includes(e.target[0].value.toLowerCase()));
+      let searchBool = this.state.searchBool;
+      this.setState({
+        originalList,
+        data: newList,
+        searchBool: !searchBool,
+        searchVal: e.target[0].value,
+      });
+      e.target[0].value = '';
+    }
+  }
+
+  handleBackToOriginalList() {
+    if (this.state.searchBool) {
+      let originalList = this.state.originalList;
+      let searchBool = this.state.searchBool;
+      this.setState({
+        data: originalList,
+        searchBool: !searchBool,
+        searchVal: '',
+      });
+    }
   }
 
   renderView() {
@@ -129,13 +159,13 @@ class App extends React.Component {
 
           <ReviewsHeader>
             <FlexSpan>
-              <IconContext.Provider value={{ color: "#378187"}}>
+              <IconContext.Provider value={{ color: '#378187', height:'40px', width:'40px'}}>
                 <IoIosStar />
               </IconContext.Provider>
               <div>{this.state.staticData.ratings[0]} </div>
             </FlexSpan>
             <VerLine />
-            <div>{this.state.data.length} reviews</div>
+            <div>{this.state.searchBool ? this.state.originalList.length : this.state.data.length} reviews</div>
           </ReviewsHeader>
 
           <Container>
@@ -144,7 +174,7 @@ class App extends React.Component {
             <StaticVote staticData={this.state.staticData} />
           </Container>
 
-          <Search />
+          <Search state={this.state} handleSearchChange={this.handleSearchChange.bind(this)} handleBackToOriginalList={this.handleBackToOriginalList.bind(this)}/>
 
           <Reviews data={this.state.data} staticData={this.state.staticData} />
         </Body>
