@@ -5,7 +5,7 @@ const Container = styled.ul`
 margin-top: 30px;
 width: 544px;
 height: 90px;
-padding: 0;
+padding: 10px;
 
 display: grid;
 grid-template-columns: 50% 50%;
@@ -13,9 +13,51 @@ grid-template-rows: 1fr 1fr 1fr;
 `;
 
 const List = styled.li`
+display: flex;
+flex-direction: row;
 list-style-type: none;
 `;
 
+const AlignRight = styled.div`
+display: flex;
+flex-direction: row;
+margin-left: auto;
+margin-right: 30px;
+`;
+
+const GaugeContainer = styled.div`
+display: flex;
+flex-direction: row;
+position: relative;
+`;
+
+const GaugeBottom = styled.div`
+width: 84px;
+border-bottom: 4px solid #BEBEBE;
+margin-bottom: 18px;
+margin-right: 6px;
+border-radius: 1px;
+
+position: absolute;
+top: 7px;
+left: -90px;
+`;
+
+const GaugeTop = styled.div`
+width: 60px;
+border-bottom: 4px solid rgb(0, 166, 153);
+margin-bottom: 18px;
+margin-right: 6px;
+border-radius: 1px;
+
+position: absolute;
+top: 7px;
+left: -90px;
+`;
+
+const style = (ratio) => ({
+  width: `${(ratio*84).toString()}px`,
+});
 
 class StaticRating extends React.Component {
   constructor(props) {
@@ -37,7 +79,14 @@ class StaticRating extends React.Component {
       <Container>
         {Object.keys(this.state.order).map((data)=> (
           <List key={data}>
-            <div>{this.state.order[data]} {this.props.staticData.ratings[data]}</div>
+              {this.state.order[data]}
+              <AlignRight>
+                <GaugeContainer>
+                  <GaugeBottom />
+                  <GaugeTop style={style(this.props.staticData.ratings[data]/5)}/>
+                </GaugeContainer>
+                {this.props.staticData.ratings[data]}
+              </AlignRight>
           </List>
         ))}
       </Container>

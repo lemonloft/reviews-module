@@ -35,15 +35,28 @@ const HorLine = styled.div`
 `;
 
 const VerLine = styled.div`
-  height: 20px;
+  height: 15px;
   border-left: 1px solid #BEBEBE;
   margin-right: 15px;
+  margin-top: 5px;
 `;
 
 const FlexSpan = styled.span`
 display: flex;
 flex-direction: row;
 margin-right: 15px;
+`;
+
+const STAR = styled.div`
+color: rgb(0, 166, 153);
+font-size: 15px;
+margin-top: 2px;
+margin-right: 3px;
+`;
+
+const FlexRow = styled.div`
+display: flex;
+flex-direction: row;
 `;
 
 class App extends React.Component {
@@ -159,20 +172,25 @@ class App extends React.Component {
 
           <ReviewsHeader>
             <FlexSpan>
-              <IconContext.Provider value={{ color: '#378187', height:'40px', width:'40px'}}>
+              {/* <IconContext.Provider value={{ color: '#378187', height:'40px', width:'40px'}}>
                 <IoIosStar />
-              </IconContext.Provider>
-              <div>{this.state.staticData.ratings[0]} </div>
+              </IconContext.Provider> */}
+              <FlexRow>
+                <STAR>&#9733;</STAR>
+                {this.state.staticData.ratings[0]} 
+              </FlexRow>
             </FlexSpan>
             <VerLine />
             <div>{this.state.searchBool ? this.state.originalList.length : this.state.data.length} reviews</div>
           </ReviewsHeader>
 
-          <Container>
-            <StaticRating staticData={this.state.staticData} />
-            <HorLine />
-            <StaticVote staticData={this.state.staticData} />
-          </Container>
+          {this.state.searchBool ? (<div />) : (
+            <Container>
+              <StaticRating staticData={this.state.staticData} />
+              <HorLine />
+              <StaticVote staticData={this.state.staticData} />
+            </Container>
+          )}
 
           <Search state={this.state} handleSearchChange={this.handleSearchChange.bind(this)} handleBackToOriginalList={this.handleBackToOriginalList.bind(this)}/>
 

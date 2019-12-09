@@ -1,10 +1,12 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
+import HostResponse from './HostResponse.jsx';
+import PageCarousel from './PageCarousel.jsx';
 
 const Avatar = styled.img`
 border-radius: 50%;
-`
+`;
 
 const Body = styled.div`
 display: flex;
@@ -22,7 +24,7 @@ width: 594px;
 const HorizontalTest = styled.div`
 display: flex;
 flex-direction: row;
-`
+`;
 
 const VerticalTest = styled.div`
 display: flex;
@@ -30,7 +32,7 @@ flex-direction: column;
 margin-left: 15px;
 
 justify-content: center;
-`
+`;
 
 const ReviewButton = styled.button`
 outline:none;
@@ -42,13 +44,25 @@ font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue
 :hover {
     text-decoration: underline;
 }
-`
+`;
+
+const HorLine = styled.div`
+  width: 594px;
+  border-bottom: 1px solid #BEBEBE;
+  margin-top: 25px;
+  margin-bottom: 5px;
+`;
+
+const Margin = styled.div`
+margin-top: 10px;
+`;
 
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         isClicked: this.props.data.map((data) => {return false}),
+        revPageNum: 1,
     };
   }
 
@@ -76,10 +90,32 @@ class Reviews extends React.Component {
     });
   }
 
+  changePageNum(pageNum) {
+    this.setState({
+      revPageNum: pageNum,
+    })
+  }
+
+  leftPageNum() {
+    let rPN = this.state.revPageNum;
+    this.setState({
+      revPageNum: rPN - 1,
+    })
+  }
+
+  rightPageNum(pageNum) {
+    let rPN = this.state.revPageNum;
+    this.setState({
+      revPageNum: rPN + 1,
+    })
+  }
+
   render() {
+    let pageNum = this.state.revPageNum;
+    let pageData = this.props.data.slice((pageNum-1)*7, pageNum*7);
     return (
       <Body>
-        {this.props.data.map((data, index) => (
+        {pageData.map((data, index) => (
           <Review key={data._id}>
             <HorizontalTest>
                 <a href="/">
@@ -90,30 +126,28 @@ class Reviews extends React.Component {
                   <span>{this.getProperDate(data.date)}</span>
                 </VerticalTest>
             </HorizontalTest>
+            <Margin />
             <ReviewText>
                 <span>
                 {data.body.length <= 275 &&
                     data.body
                 }
                 {data.body.length > 275 &&
-                    (()=>{
-                        // data.body.slice(0,275) + data.body.slice(275).split(' ')[0];
-                        // data.body.slice(275).split(' ').slice(1).join(' ');
-                    return (this.state.isClicked[index] ? data.body.slice(0,275) + data.body.slice(275).split(' ')[0] : data.body.slice(0,275) + data.body.slice(275).split(' ')[0] + '...')
-                  })()
+                (this.state.isClicked[index] ? data.body.slice(0,275) + data.body.slice(275).split(' ')[0] : data.body.slice(0,275) + data.body.slice(275).split(' ')[0] + '...')
                 }
                 {data.body.length > 275 &&
                     (this.state.isClicked[index] ? (' ' + data.body.slice(275).split(' ').slice(1).join(' ')) : (<ReviewButton onClick={(e)=>{this.changeReadmoreStatus(e, index)}}>Read more</ReviewButton>))
                 }
+                <HostResponse data={data} />
+                <HorLine />
                 </span>
             </ReviewText>
           </Review>
         ))}
+        <PageCarousel changePageNum={this.changePageNum.bind(this)} revPageNum={this.state.revPageNum} end={Math.ceil(this.props.data.length/7)} leftPageNum={this.leftPageNum.bind(this)} rightPageNum={this.rightPageNum.bind(this)} />
       </Body>
     );
   }
 }
 
-// p{font-family:"Times New Roman", Times, serif;}
-// circular, Roboto, "Helvetica Neue", sans-serif;
 export default Reviews;
