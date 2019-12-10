@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "webpack -w -d",
-    "server": "nodemon ./server/start.js",
+    "server": "nodemon ./server/server.js",
     "db:setup": "node server/seed/seed.js"
   },
   "repository": {

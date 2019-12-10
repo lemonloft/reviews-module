@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const controller = require('./controllers');
 const cors = require('cors');
+const port = 3004;
 
 const app = express();
 
@@ -17,4 +18,6 @@ app.get('/api/reviews/:hostId', (req, res) => {
   controller.reviews.get(req, res);
 });
 
-module.exports = app;
+app.listen(port, () => {
+  console.log(`we be arriving at port ${port}`);
+});
