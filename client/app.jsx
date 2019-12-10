@@ -103,7 +103,7 @@ class App extends React.Component {
   }
 
   renderView() {
-    let url = 'http://localhost:3000/api/reviews';
+    let url = '/api/reviews';
     if (window.location.pathname.length > 1) {
       url += window.location.pathname;
     }
