@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS Reviews;
+DROP DATABASE IF EXISTS LemonLoftReviews;
 
-CREATE DATABASE Reviews;
+CREATE DATABASE LemonLoftReviews;
 
-USE Reviews;
+USE LemonLoftReviews;
 
 CREATE TABLE users (
   `_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
