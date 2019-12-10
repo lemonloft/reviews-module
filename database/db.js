@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('LemonLoft', 'loftuser', 'password', {
+const sequelize = new Sequelize('Reviews', 'loftuser', 'password', {
   host: 'localhost',
   dialect: 'mysql',
   pool: {
