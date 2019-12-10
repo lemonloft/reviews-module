@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IconContext } from "react-icons";
-import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
+import { AiOutlineLeftCircle, AiOutlineRightCircle } from "react-icons/ai";
 
 const Container = styled.div`
 display: flex;
@@ -12,23 +12,65 @@ flex-direction: row;
 const CurrentButton = styled.button`
 outline:none;
 border:none;
-color: #378187;
+color: #FFFFFF;
 font-size: 16px;
-padding: 0;
 font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 :hover {
     text-decoration: underline;
 }
 width: 35px;
 height: 38px;
+background-color: #378187;
+border-radius: 50%;
+margin-left: 15px;
+margin-right: 15px;
 `;
 
 const Button = styled.button`
+outline:none;
+border:none;
+color: #378187;
+font-size: 16px;
+font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 :hover {
     text-decoration: underline;
 }
 width: 35px;
 height: 38px;
+background-color: #FFFFFF;
+margin-left: 15px;
+margin-right: 15px;
+`;
+
+const LeftButton = styled.button`
+outline:none;
+border:none;
+color: #378187;
+padding-top: 3.5px;
+font-size: 16px;
+width: 35px;
+height: 38px;
+background-color: #FFFFFF;
+margin-right: 15px;
+`;
+
+const RightButton = styled.button`
+outline:none;
+border:none;
+color: #378187;
+padding-top: 3.5px;
+font-size: 16px;
+width: 35px;
+height: 38px;
+background-color: #FFFFFF;
+margin-left: 15px;
+`;
+
+const ThreeDots = styled.div`
+padding-top: 5px;
+font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+margin-left: 15px;
+margin-right: 15px;
 `;
 
 class PageCarousel extends React.Component {
@@ -38,25 +80,28 @@ class PageCarousel extends React.Component {
     };
   }
 
-  //   props.revPageNum
   render() {
-    const pageNum = this.props.revPageNum;
+    const pageNum = this.props.searchBool? this.props.serPageNum : this.props.revPageNum;
     const end = this.props.end;
 
     let leftButton = (
-      <IconContext.Provider value={{ color: "#378187"}}>
-        <IoIosArrowDropleft size={25} onClick={this.props.leftPageNum}/>
-      </IconContext.Provider>
+      <LeftButton>
+        <IconContext.Provider value={{ color: "#378187"}}>
+          <AiOutlineLeftCircle size={30} onClick={this.props.leftPageNum}/>
+        </IconContext.Provider>
+      </LeftButton>
     );
 
     let rightButton = (
-      <IconContext.Provider value={{ color: "#378187"}}>
-        <IoIosArrowDropright size={25} onClick={this.props.rightPageNum} />
-      </IconContext.Provider>
+      <RightButton>
+        <IconContext.Provider value={{ color: "#378187"}}>
+          <AiOutlineRightCircle size={30} onClick={this.props.rightPageNum} />
+        </IconContext.Provider>
+      </RightButton>
     );
 
     let threeDots = (
-      <div>...</div>
+      <ThreeDots>...</ThreeDots>
     );
 
     const createButton = (num) => {

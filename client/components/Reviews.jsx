@@ -50,7 +50,6 @@ const HorLine = styled.div`
   width: 594px;
   border-bottom: 1px solid #BEBEBE;
   margin-top: 25px;
-  margin-bottom: 5px;
 `;
 
 const Margin = styled.div`
@@ -63,7 +62,14 @@ class Reviews extends React.Component {
     this.state = {
         isClicked: this.props.data.map((data) => {return false}),
         revPageNum: 1,
+        serPageNum: 1,
     };
+  }
+
+  resetSerPageNum() {
+    this.setState({
+        serPageNum: 1,
+    });
   }
 
   getProperDate(dateString) {
@@ -91,27 +97,53 @@ class Reviews extends React.Component {
   }
 
   changePageNum(pageNum) {
-    this.setState({
-      revPageNum: pageNum,
-    })
+    if (!this.props.searchBool) {
+        window.scroll({top: 400, left: 0, behavior: 'smooth' });
+        this.setState({
+          revPageNum: pageNum,
+        })
+    } else if (this.props.searchBool) {
+        window.scroll({top: 100, left: 0, behavior: 'smooth' });
+        this.setState({
+          serPageNum: pageNum,
+        })    
+    }
   }
 
   leftPageNum() {
-    let rPN = this.state.revPageNum;
-    this.setState({
-      revPageNum: rPN - 1,
-    })
+    if (!this.props.searchBool) {
+        window.scroll({top: 400, left: 0, behavior: 'smooth' });
+        let rPN = this.state.revPageNum;
+        this.setState({
+          revPageNum: rPN - 1,
+        })
+    } else if (this.props.searchBool) {
+        window.scroll({top: 100, left: 0, behavior: 'smooth' });
+        let sPN = this.state.serPageNum;
+        this.setState({
+          serPageNum: sPN - 1,
+        })   
+    }
   }
 
-  rightPageNum(pageNum) {
-    let rPN = this.state.revPageNum;
-    this.setState({
-      revPageNum: rPN + 1,
-    })
+  rightPageNum() {
+    if (!this.props.searchBool) {
+        window.scroll({top: 400, left: 0, behavior: 'smooth' });
+        let rPN = this.state.revPageNum;
+        this.setState({
+          revPageNum: rPN + 1,
+        })
+    } else if (this.props.searchBool) {
+        window.scroll({top: 100, left: 0, behavior: 'smooth' });
+        let sPN = this.state.serPageNum;
+        this.setState({
+          serPageNum: sPN + 1,
+        })   
+    }
   }
 
   render() {
-    let pageNum = this.state.revPageNum;
+    let pageNum = this.props.searchBool ? this.state.serPageNum : this.state.revPageNum;
     let pageData = this.props.data.slice((pageNum-1)*7, pageNum*7);
     return (
       <Body>
@@ -144,7 +176,7 @@ class Reviews extends React.Component {
             </ReviewText>
           </Review>
         ))}
-        <PageCarousel changePageNum={this.changePageNum.bind(this)} revPageNum={this.state.revPageNum} end={Math.ceil(this.props.data.length/7)} leftPageNum={this.leftPageNum.bind(this)} rightPageNum={this.rightPageNum.bind(this)} />
+        <PageCarousel searchBool={this.props.searchBool} changePageNum={this.changePageNum.bind(this)} serPageNum={this.state.serPageNum} revPageNum={this.state.revPageNum} end={Math.ceil(this.props.data.length/7)} leftPageNum={this.leftPageNum.bind(this)} rightPageNum={this.rightPageNum.bind(this)} />
       </Body>
     );
   }

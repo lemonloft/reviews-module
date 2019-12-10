@@ -119,7 +119,6 @@ const Host = sequelize.define('hosts', {
 module.exports = {
   getReviews: (hostId, callback) => {
     let hostIdSQL = hostId;
-    // sequelize.query(`SELECT * FROM reviews WHERE hostId = 1`)
     if (!hostId) {
       hostIdSQL = 1;
     }

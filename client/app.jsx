@@ -62,6 +62,7 @@ flex-direction: row;
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.reviews = React.createRef();
     this.state = {
       data: [],
       searchBool: false,
@@ -89,6 +90,7 @@ class App extends React.Component {
   }
 
   handleBackToOriginalList() {
+    this.reviews.current.resetSerPageNum();
     if (this.state.searchBool) {
       let originalList = this.state.originalList;
       let searchBool = this.state.searchBool;
@@ -172,9 +174,6 @@ class App extends React.Component {
 
           <ReviewsHeader>
             <FlexSpan>
-              {/* <IconContext.Provider value={{ color: '#378187', height:'40px', width:'40px'}}>
-                <IoIosStar />
-              </IconContext.Provider> */}
               <FlexRow>
                 <STAR>&#9733;</STAR>
                 {this.state.staticData.ratings[0]} 
@@ -194,7 +193,7 @@ class App extends React.Component {
 
           <Search state={this.state} handleSearchChange={this.handleSearchChange.bind(this)} handleBackToOriginalList={this.handleBackToOriginalList.bind(this)}/>
 
-          <Reviews data={this.state.data} staticData={this.state.staticData} />
+          <Reviews ref={this.reviews} searchBool={this.state.searchBool} data={this.state.data} staticData={this.state.staticData} />
         </Body>
       );
     }

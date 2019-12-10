@@ -47,7 +47,6 @@ const BackButton = styled.div`
 outline:none;
 border:none;
 font-size: 16px;
-padding: 0;
 margin-left: auto;
 font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 `;
