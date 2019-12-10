@@ -59,7 +59,7 @@ display: flex;
 flex-direction: row;
 `;
 
-class App extends React.Component {
+class ReviewsModule extends React.Component {
   constructor(props) {
     super(props);
     this.reviews = React.createRef();
@@ -200,4 +200,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default ReviewsModule;
