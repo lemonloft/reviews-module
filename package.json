@@ -7,6 +7,7 @@
     "test": "jest --coverage",
     "build": "webpack -w -d",
     "server": "nodemon ./server/server.js",
+    "server:production": "node ./server/server.js",
     "db:setup": "node server/seed/seed.js",
     "build:production": "webpack --mode=production"
   },

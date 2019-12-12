@@ -2,6 +2,7 @@ const faker = require('faker');
 const { Review } = require('../../database/db.js');
 const { User } = require('../../database/db.js');
 const { Host } = require('../../database/db.js');
+const { sequelize } = require('../../database/db.js');
 
 const userArray = [];
 for (let i = 1; i <= 500; i += 1) {
@@ -66,14 +67,13 @@ for (let i = 1; i <= 100; i += 1) {
   }
 }
 
-User.bulkCreate(userArray)
+sequelize.sync({ force: true })
   .then(() => {
-    console.log('Users data generated!');
-    Host.bulkCreate(hostArray);
-    console.log('Hosts data generated!');
+    User.bulkCreate(userArray);
   })
   .then(() => {
-    console.log(reviewsArray);
+    Host.bulkCreate(hostArray);
+  })
+  .then(() => {
     Review.bulkCreate(reviewsArray);
-    console.log('Reviews data generated!');
   });

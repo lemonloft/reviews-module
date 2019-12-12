@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('LemonLoftReviews', 'loftuser', 'password', {
-  host: 'localhost',
+  host: 'database',
   dialect: 'mysql',
   pool: {
     max: 5,
@@ -138,3 +138,4 @@ module.exports = {
 module.exports.Review = Review;
 module.exports.User = User;
 module.exports.Host = Host;
+module.exports.sequelize = sequelize;
