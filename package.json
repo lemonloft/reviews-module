@@ -46,11 +46,13 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "aws-cli-js": "^2.0.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
     "mysql2": "^2.0.1",
+    "pip": "0.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-icons": "^3.8.0",
