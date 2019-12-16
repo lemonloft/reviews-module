@@ -1,8 +1,7 @@
-/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { IconContext } from "react-icons";
-import { AiOutlineLeftCircle, AiOutlineRightCircle } from "react-icons/ai";
+import { IconContext } from 'react-icons';
+import { AiOutlineLeftCircle, AiOutlineRightCircle } from 'react-icons/ai';
 
 const Container = styled.div`
 display: flex;
@@ -84,15 +83,15 @@ class PageCarousel extends React.Component {
     const pageNum = this.props.searchBool? this.props.serPageNum : this.props.revPageNum;
     const end = this.props.end;
 
-    let leftButton = (
+    const leftButton = (
       <LeftButton>
         <IconContext.Provider value={{ color: "#378187"}}>
-          <AiOutlineLeftCircle size={30} onClick={this.props.leftPageNum}/>
+          <AiOutlineLeftCircle size={30} onClick={this.props.leftPageNum} />
         </IconContext.Provider>
       </LeftButton>
     );
 
-    let rightButton = (
+    const rightButton = (
       <RightButton>
         <IconContext.Provider value={{ color: "#378187"}}>
           <AiOutlineRightCircle size={30} onClick={this.props.rightPageNum} />
@@ -100,136 +99,143 @@ class PageCarousel extends React.Component {
       </RightButton>
     );
 
-    let threeDots = (
+    const threeDots = (
       <ThreeDots>...</ThreeDots>
     );
 
     const createButton = (num) => {
-        return (
-            (num === pageNum) ? 
-            <CurrentButton value={num} onClick={()=>{this.props.changePageNum(num)}} type="submit">{num}</CurrentButton> :
-            <Button value={num} onClick={()=>{this.props.changePageNum(num)}} type="submit">{num}</Button>
-        )
-    }
+      return (
+        (num === pageNum) ?
+          <CurrentButton value={num} onClick={() => { this.props.changePageNum(num); }} type="submit">{num}</CurrentButton> :
+          <Button value={num} onClick={() => { this.props.changePageNum(num); }} type="submit">{num}</Button>
+      );
+    };
 
     if (pageNum === 1) {
       return (
         <Container>
-            {createButton(1)}
-            {(end >= 2) && createButton(2)}
-            {(end >= 3) && createButton(3)}
-            {(end >= 4) && threeDots}
-            {(end >= 4) && createButton(end)}
-            {(end >= 2) && rightButton}      
+          {createButton(1)}
+          {(end >= 2) && createButton(2)}
+          {(end >= 3) && createButton(3)}
+          {(end >= 4) && threeDots}
+          {(end >= 4) && createButton(end)}
+          {(end >= 2) && rightButton}
         </Container>
-      )
-    } else if (pageNum === 2) {
-        return (
-          <Container>
-              {leftButton}
-              {createButton(1)}
-              {createButton(2)}
-              {(end >= 3) && createButton(3)}
-              {(end >= 4) && threeDots}
-              {(end >= 4) && createButton(end)}
-              {(end >= 3) && rightButton}      
-          </Container>
-        )
-      } else if (pageNum === 3) {
-        return (
-          <Container>
-            {leftButton}
-            {createButton(1)}
-            {createButton(2)}
-            {createButton(3)}
-            {(end >= 4) && createButton(4)}
-            {(end >= 5) && threeDots}
-            {(end >= 5) && createButton(end)}
-            {(end >= 4) && rightButton}      
-          </Container>
-        )
-      } else if (pageNum === 4) {
-        return (
-          <Container>
-            {leftButton}
-            {createButton(1)}
-            {createButton(2)}
-            {createButton(3)}
-            {createButton(4)}
-            {(end >= 5) && createButton(5)}
-            {(end >= 6) && threeDots}
-            {(end >= 6) && createButton(end)}
-            {(end >= 5) && rightButton}      
-          </Container>
-        )
-      } else if ((pageNum - 4 >= 1) && (pageNum + 4 <= end)) {
-        return (
-          <Container>
-            {leftButton}
-            {createButton(1)}
-            {threeDots}
-            {createButton(pageNum - 1)}
-            {createButton(pageNum)}
-            {createButton(pageNum + 1)}
-            {threeDots}
-            {createButton(end)}
-            {rightButton}
-          </Container>
-        );
-      } else if (pageNum === end - 3) {
-        return (
-          <Container>
-            {leftButton}
-            {createButton(1)}
-            {(pageNum > 2) && threeDots}
-            {(pageNum > 2) && createButton(end - 4)}
-            {createButton(end - 3)}
-            {createButton(end - 2)}
-            {createButton(end - 1)}
-            {createButton(end)}
-            {rightButton}      
-          </Container>
-        )
-      } else if (pageNum === end - 2) {
-        return (
-          <Container>
-            {leftButton}
-            {createButton(1)}
-            {(pageNum > 3) && threeDots}
-            {createButton(end - 3)}
-            {createButton(end - 2)}
-            {createButton(end - 1)}
-            {createButton(end)}
-            {rightButton}      
-          </Container>
-        )
-      } else if (pageNum === end - 1) {
-        return (
-          <Container>
-            {leftButton}
-            {createButton(1)}
-            {threeDots}
-            {createButton(end - 2)}
-            {createButton(end - 1)}
-            {createButton(end)}
-            {rightButton}      
-          </Container>
-        )
-      } else if (pageNum === end) {
-        return (
-          <Container>
-            {leftButton}
-            {createButton(1)}
-            {threeDots}
-            {createButton(end - 2)}
-            {createButton(end - 1)}
-            {createButton(end)}
-          </Container>
-        )
-      } else {
-          return (<div/>)
-      }
+      );
     }
+    if (pageNum === 2) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {createButton(2)}
+          {(end >= 3) && createButton(3)}
+          {(end >= 4) && threeDots}
+          {(end >= 4) && createButton(end)}
+          {(end >= 3) && rightButton}
+        </Container>
+      );
+    }
+    if (pageNum === 3) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {createButton(2)}
+          {createButton(3)}
+          {(end >= 4) && createButton(4)}
+          {(end >= 5) && threeDots}
+          {(end >= 5) && createButton(end)}
+          {(end >= 4) && rightButton}
+        </Container>
+      );
+    }
+    if (pageNum === 4) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {createButton(2)}
+          {createButton(3)}
+          {createButton(4)}
+          {(end >= 5) && createButton(5)}
+          {(end >= 6) && threeDots}
+          {(end >= 6) && createButton(end)}
+          {(end >= 5) && rightButton}
+        </Container>
+      );
+    }
+    if ((pageNum - 4 >= 1) && (pageNum + 4 <= end)) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {threeDots}
+          {createButton(pageNum - 1)}
+          {createButton(pageNum)}
+          {createButton(pageNum + 1)}
+          {threeDots}
+          {createButton(end)}
+          {rightButton}
+        </Container>
+      );
+    }
+    if (pageNum === end - 3) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {(pageNum > 2) && threeDots}
+          {(pageNum > 2) && createButton(end - 4)}
+          {createButton(end - 3)}
+          {createButton(end - 2)}
+          {createButton(end - 1)}
+          {createButton(end)}
+          {rightButton}
+        </Container>
+      );
+    }
+    if (pageNum === end - 2) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {(pageNum > 3) && threeDots}
+          {createButton(end - 3)}
+          {createButton(end - 2)}
+          {createButton(end - 1)}
+          {createButton(end)}
+          {rightButton}
+        </Container>
+      );
+    }
+    if (pageNum === end - 1) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {threeDots}
+          {createButton(end - 2)}
+          {createButton(end - 1)}
+          {createButton(end)}
+          {rightButton}
+        </Container>
+      );
+    }
+    if (pageNum === end) {
+      return (
+        <Container>
+          {leftButton}
+          {createButton(1)}
+          {threeDots}
+          {createButton(end - 2)}
+          {createButton(end - 1)}
+          {createButton(end)}
+        </Container>
+      );
+    }
+    return (<div />);
+  }
 }
 
 export default PageCarousel;

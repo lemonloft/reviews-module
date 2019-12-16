@@ -1,7 +1,7 @@
 import React from 'react';
+import { shallow, mount } from 'enzyme';
 import App from '../client/app.jsx';
 import Reviews from '../client/components/Reviews.jsx';
-import { shallow, mount } from 'enzyme';
 
 describe('it App component using shallow', () => {
   let shallowWrapper;
@@ -29,7 +29,7 @@ describe('it App component using mount', () => {
   });
 });
 
-let state = {
+const state = {
   data: [{
     accuracy: 4,
     amaAme: 1,

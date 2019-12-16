@@ -56,7 +56,7 @@ left: -90px;
 `;
 
 const style = (ratio) => ({
-  width: `${(ratio*84).toString()}px`,
+  width: `${(ratio * 84).toString()}px`,
 });
 
 class StaticRating extends React.Component {
@@ -79,14 +79,14 @@ class StaticRating extends React.Component {
       <Container>
         {Object.keys(this.state.order).map((data)=> (
           <List key={data}>
-              {this.state.order[data]}
-              <AlignRight>
-                <GaugeContainer>
-                  <GaugeBottom />
-                  <GaugeTop style={style(this.props.staticData.ratings[data]/5)}/>
-                </GaugeContainer>
-                {this.props.staticData.ratings[data]}
-              </AlignRight>
+            {this.state.order[data]}
+            <AlignRight>
+              <GaugeContainer>
+                <GaugeBottom />
+                <GaugeTop style={style(this.props.staticData.ratings[data]/5)}/>
+              </GaugeContainer>
+              {this.props.staticData.ratings[data]}
+            </AlignRight>
           </List>
         ))}
       </Container>

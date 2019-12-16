@@ -44,7 +44,6 @@ for (let i = 1; i <= 100; i += 1) {
       userId,
       date,
       body: longRev ? `${faker.lorem.paragraph()} ${faker.lorem.paragraph()}` : faker.lorem.paragraph(),
-      // Math.random() * (max - min) + min
       rating: Math.floor(Math.random() * 3 + 3),
       cleanliness: Math.floor(Math.random() * 3 + 3),
       communication: Math.floor(Math.random() * 3 + 3),
@@ -58,8 +57,6 @@ for (let i = 1; i <= 100; i += 1) {
       stySpa: Math.random() >= 0.3,
       spaCle: Math.random() >= 0.3,
       hostId: i,
-      // hostRes: faker.lorem.paragraph(),
-      // hostResDate: hostResDate,
       hostRes: hostRes ? faker.lorem.paragraph() : null,
       hostResDate: hostRes ? hostResDate : null,
     };

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IconContext } from "react-icons";
-import { FiSearch } from "react-icons/fi";
+import { IconContext } from 'react-icons';
+import { FiSearch } from 'react-icons/fi';
 
 const Form = styled.form`
 margin-top: 25px;
@@ -72,27 +72,33 @@ class Search extends React.Component {
 
   render() {
     return (
-        <div>
-          {this.props.state.searchBool ?
-            (
+      <div>
+        {this.props.state.searchBool ?
+          (
             <FlexCol>
               <BackToAll>
-                <div>{this.props.state.data.length} guests have mentioned “{this.props.state.searchVal}”</div>
+                <div>
+                  {this.props.state.data.length}
+                  {' '}
+                  guests have mentioned “
+                  {this.props.state.searchVal}
+                  ”
+                </div>
                 <BackButton onClick={this.props.handleBackToOriginalList}>Back to all reviews</BackButton>
               </BackToAll>
               <HorLine />
             </FlexCol>
-            ) : (
-              <Form onSubmit={this.props.handleSearchChange}>
-                <Input type="text" placeholder=" Search reviews"></Input>
-                <Button type="submit" value="Go!">
-                  <IconContext.Provider value={{ color: "#BEBEBE"}}>
-                    <FiSearch size={17} />
-                  </IconContext.Provider>
-                </Button>
-              </Form>
-            )}
-        </div>
+          ) : (
+            <Form onSubmit={this.props.handleSearchChange}>
+              <Input type="text" placeholder=" Search reviews" />
+              <Button type="submit" value="Go!">
+                <IconContext.Provider value={{ color: '#BEBEBE'}}>
+                  <FiSearch size={17} />
+                </IconContext.Provider>
+              </Button>
+            </Form>
+          )}
+      </div>
     );
   }
 }

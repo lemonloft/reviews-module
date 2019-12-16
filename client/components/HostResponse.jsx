@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -74,35 +73,34 @@ class HostResponse extends React.Component {
   }
 
   render() {
-    if (this.props.data.hostRes){
-        return (
-          <Response>
-              <HorizontalTest>
-              <a href="/">
-                  <Avatar src={this.props.data.hostImage} height="40px" width="40px" />
-                </a>
-              <VerticalTest>
-                  <div><b>Response from {this.props.data.hostName}:</b></div>
-                  <span>{this.getProperDate(this.props.data.hostResDate)}</span>
-                </VerticalTest>
-            </HorizontalTest>
-              <Margin />
-              <ResponseText>
-              <span>
-                  {this.props.data.hostRes.length <= 275
-                    && this.props.data.hostRes}
-                  {this.props.data.hostRes.length > 275
-                    && (this.state.isClicked ? this.props.data.hostRes.slice(0,275) + this.props.data.hostRes.slice(275).split(' ')[0] : this.props.data.hostRes.slice(0,275) + this.props.data.hostRes.slice(275).split(' ')[0] + '...')
+    if (this.props.data.hostRes) {
+      return (
+        <Response>
+          <HorizontalTest>
+            <a href="/">
+              <Avatar src={this.props.data.hostImage} height="40px" width="40px" />
+            </a>
+            <VerticalTest>
+              <div><b>Response from {this.props.data.hostName}:</b></div>
+              <span>{this.getProperDate(this.props.data.hostResDate)}</span>
+            </VerticalTest>
+          </HorizontalTest>
+          <Margin />
+          <ResponseText>
+            <span>
+              {this.props.data.hostRes.length <= 275 
+                  && this.props.data.hostRes}
+              {this.props.data.hostRes.length > 275
+                    && (this.state.isClicked ? this.props.data.hostRes.slice(0, 275) + this.props.data.hostRes.slice(275).split(' ')[0] : this.props.data.hostRes.slice(0, 275) + this.props.data.hostRes.slice(275).split(' ')[0] + '...')
                   }
-                  {this.props.data.hostRes.length > 275
+              {this.props.data.hostRes.length > 275
                     && (this.state.isClicked ? (` ${  this.props.data.hostRes.slice(275).split(' ').slice(1).join(' ')}`) : (<ReviewButton onClick={(e) => { this.changeReadmoreStatusHost(e) ;}}>Read more</ReviewButton>))}
-                </span>
-              </ResponseText>
-            </Response>
-        );
-    } else {
-        return (<div/>)
+            </span>
+          </ResponseText>
+        </Response>
+      );
     }
+    return (<div />);
   }
 }
 

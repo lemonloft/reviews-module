@@ -1,15 +1,15 @@
 import React from 'react';
 import { ajax } from 'jquery';
-import { IconContext } from "react-icons";
-import { IoIosStar } from "react-icons/io";
 import styled from 'styled-components';
 import Reviews from './components/Reviews.jsx';
 import StaticRating from './components/StaticRating.jsx';
 import StaticVote from './components/StaticVote.jsx';
 import Search from './components/Search.jsx';
 
+
 const Body = styled.div`
 font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+float: right;
 `;
 
 const Container = styled.ul`
@@ -21,7 +21,7 @@ height: 275px;
 border-style: solid;
 border-width: 1px;
 border-radius: 12px;
-border-color: #BEBEBE;
+border-color: rgb(228, 231, 231);
 margin-left: 0px;
 `;
 
@@ -31,12 +31,12 @@ display: flex;
 
 const HorLine = styled.div`
   width: 544px;
-  border-bottom: 1px solid #BEBEBE;
+  border-bottom: 1px solid rgb(228, 231, 231);
 `;
 
 const VerLine = styled.div`
   height: 15px;
-  border-left: 1px solid #BEBEBE;
+  border-left: 1px solid rgb(228, 231, 231);
   margin-right: 15px;
   margin-top: 5px;
 `;
@@ -75,10 +75,13 @@ class ReviewsModule extends React.Component {
 
   handleSearchChange(e) {
     e.preventDefault();
-    if (!this.state.searchBool) {
-      let originalList = this.state.data.slice();
-      let newList = this.state.data.filter(data => data.body.toLowerCase().includes(e.target[0].value.toLowerCase()));
-      let searchBool = this.state.searchBool;
+    const inValid = /^\s+$/;
+    const k = inValid.test(e.target[0].value);
+    if (!this.state.searchBool && (e.target[0].value.length > 0) && (!k)) {
+      window.scroll({ top: 1440, left: 0, behavior: 'smooth' });
+      const originalList = this.state.data.slice();
+      const newList = this.state.data.filter(data => data.body.toLowerCase().includes(e.target[0].value.toLowerCase()));
+      const searchBool = this.state.searchBool;
       this.setState({
         originalList,
         data: newList,
@@ -92,8 +95,8 @@ class ReviewsModule extends React.Component {
   handleBackToOriginalList() {
     this.reviews.current.resetSerPageNum();
     if (this.state.searchBool) {
-      let originalList = this.state.originalList;
-      let searchBool = this.state.searchBool;
+      const originalList = this.state.originalList;
+      const searchBool = this.state.searchBool;
       this.setState({
         data: originalList,
         searchBool: !searchBool,
@@ -113,7 +116,7 @@ class ReviewsModule extends React.Component {
       method: 'GET',
       success: (data) => {
         const result = data[0];
-        let length = result.length;
+        const length = result.length;
 
         // rating, cleanliness, communication, checkin, accuracy, location, value
         let ratings = [0, 0, 0, 0, 0, 0, 0];
@@ -157,7 +160,6 @@ class ReviewsModule extends React.Component {
             hearts,
           },
         });
-        console.log(this.state);
       },
     });
   }
@@ -194,7 +196,7 @@ class ReviewsModule extends React.Component {
 
           <Search state={this.state} handleSearchChange={this.handleSearchChange.bind(this)} handleBackToOriginalList={this.handleBackToOriginalList.bind(this)}/>
 
-          <Reviews ref={this.reviews} searchBool={this.state.searchBool} data={this.state.data} staticData={this.state.staticData} />
+          <Reviews ref={this.reviews} searchBool={this.state.searchBool} data={this.state.data} staticData={this.state.staticData}/>
         </Body>
       );
     }

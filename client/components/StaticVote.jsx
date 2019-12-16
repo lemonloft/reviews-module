@@ -38,7 +38,6 @@ margin-right: 30px;
 
 
 class StaticVote extends React.Component {
-// spaCle, quiRes, stySpa, outHos, amaAme
   constructor(props) {
     super(props);
     this.state = {
@@ -55,16 +54,10 @@ class StaticVote extends React.Component {
   render() {
     return (
       <Container>
-        {/* {Object.keys(this.state.order).map((data)=> (
-            <List key={data}>
-              <div>{this.state.order[data]} {this.props.staticData.hearts[data]}</div>
-            </List>
-          ))} */}
-
         <List>
           <RightMarg>{this.state.order[0]}</RightMarg>
           <AlignRight>
-            <IconContext.Provider value={{ color: "#378187"}}>
+            <IconContext.Provider value={{ color: '#378187' }}>
               <GiVacuumCleaner />
             </IconContext.Provider>
             <LeftMarg>{this.props.staticData.hearts[0]}</LeftMarg>
@@ -74,7 +67,7 @@ class StaticVote extends React.Component {
         <List>
           <RightMarg>{this.state.order[1]}</RightMarg>
           <AlignRight>
-            <IconContext.Provider value={{ color: "#FCAC2E"}}>
+            <IconContext.Provider value={{ color: '#FCAC2E' }}>
               <TiMessages />
             </IconContext.Provider>
             <LeftMarg>{this.props.staticData.hearts[1]}</LeftMarg>
@@ -84,7 +77,7 @@ class StaticVote extends React.Component {
         <List>
           <RightMarg>{this.state.order[2]}</RightMarg>
           <AlignRight>
-            <IconContext.Provider value={{ color: "#FB5058"}}>
+            <IconContext.Provider value={{ color: '#FB5058' }}>
               <FaCouch />
             </IconContext.Provider>
             <LeftMarg>{this.props.staticData.hearts[2]}</LeftMarg>
@@ -94,7 +87,7 @@ class StaticVote extends React.Component {
         <List>
           <RightMarg>{this.state.order[3]}</RightMarg>
           <AlignRight>
-            <IconContext.Provider value={{ color: "#FB5058"}}>
+            <IconContext.Provider value={{ color: '#FB5058' }}>
               <FaHandHoldingHeart />
             </IconContext.Provider>
             <LeftMarg>{this.props.staticData.hearts[3]}</LeftMarg>
@@ -104,7 +97,7 @@ class StaticVote extends React.Component {
         <List>
           <RightMarg>{this.state.order[4]}</RightMarg>
           <AlignRight>
-            <IconContext.Provider value={{ color: "#FCAC2E"}}>
+            <IconContext.Provider value={{ color: '#FCAC2E' }}>
               <GiCoffeeCup />
             </IconContext.Provider>
             <LeftMarg>{this.props.staticData.hearts[4]}</LeftMarg>
