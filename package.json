@@ -48,6 +48,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "serialize-javascript": ">=2.1.1",
     "aws-cli-js": "^2.0.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
