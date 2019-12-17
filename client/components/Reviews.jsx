@@ -47,9 +47,9 @@ font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue
 `;
 
 const HorLine = styled.div`
-  width: 594px;
-  border-bottom: 1px solid rgb(228, 231, 231);
-  margin-top: 25px;
+width: 594px;
+border-bottom: 1px solid rgb(228, 231, 231);
+margin-top: 25px;
 `;
 
 const Margin = styled.div`

@@ -30,15 +30,15 @@ display: flex;
 `;
 
 const HorLine = styled.div`
-  width: 544px;
-  border-bottom: 1px solid rgb(228, 231, 231);
+width: 544px;
+border-bottom: 1px solid rgb(228, 231, 231);
 `;
 
 const VerLine = styled.div`
-  height: 15px;
-  border-left: 1px solid rgb(228, 231, 231);
-  margin-right: 15px;
-  margin-top: 5px;
+height: 15px;
+border-left: 1px solid rgb(228, 231, 231);
+margin-right: 15px;
+margin-top: 5px;
 `;
 
 const FlexSpan = styled.span`

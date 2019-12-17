@@ -48,8 +48,6 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "serialize-javascript": ">=2.1.1",
-    "aws-cli-js": "^2.0.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^4.1.0",
@@ -60,6 +58,7 @@
     "react-dom": "^16.12.0",
     "react-icons": "^3.8.0",
     "sequelize": "^5.21.2",
+    "serialize-javascript": "^2.1.2",
     "styled-components": "^4.4.1"
   }
 }

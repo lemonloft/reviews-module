@@ -3,7 +3,7 @@ const run = require('gulp-run');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 
-gulp.task('assets', () => {
+function buildprocess(cb) {
   return new Promise((resolve, reject) => {
     webpack(webpackConfig, (err, stats) => {
       if (err) {
@@ -15,14 +15,11 @@ gulp.task('assets', () => {
       resolve();
     });
   }).then(() => {
-    gulp.src('./public/index.js') // get input files.
-      .pipe(gulp.dest('https://pplemonloft.s3-us-west-1.amazonaws.com/index.js'));
+    console.log('build complete. Uploading to Amazon S3...');
+    run('aws s3 cp  ./public/index.js s3://pplemonloft/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers').exec();
+  }).catch((err) => {
+    console.log('there was an error', err);
   });
-});
+}
 
-then(() => {
-  console.log('build complete');
-  run('aws s3 cp  ./public/index.js s3://reservation-airbnb/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers').exec();
-}).catch((err) => {
-  console.log(err, 'Error');
-});
+exports.default = buildprocess;

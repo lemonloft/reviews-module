@@ -52,10 +52,10 @@ font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue
 `;
 
 const HorLine = styled.div`
-  width: 594px;
-  border-bottom: 1px solid #BEBEBE;
-  margin-top: 5px;
-  margin-bottom: 10px;
+width: 594px;
+border-bottom: 1px solid #BEBEBE;
+margin-top: 5px;
+margin-bottom: 10px;
 `;
 
 const FlexCol = styled.div`
