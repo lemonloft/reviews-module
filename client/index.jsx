@@ -1,5 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReviewsModule from './App.jsx';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import ReviewsModule from './app.jsx';
 
-ReactDOM.render(<ReviewsModule />, document.getElementById('ReviewsModule'));
+const store = createStore(
+
+);
+
+ReactDOM.render(
+    <Provider store = {store}>
+        <ReviewsModule />
+    </Provider>,
+    document.getElementById('ReviewsModule')
+);
