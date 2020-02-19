@@ -9,7 +9,8 @@
     "server": "nodemon ./server/server.js",
     "server:production": "node ./server/server.js",
     "db:setup": "node server/seed/seed.js",
-    "build:production": "webpack --mode=production"
+    "build:production": "webpack --mode=production",
+    "build:dev": "webpack -d --mode development"
   },
   "repository": {
     "type": "git",
