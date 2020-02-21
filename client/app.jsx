@@ -6,6 +6,11 @@ import StaticRating from './components/StaticRating.jsx';
 import StaticVote from './components/StaticVote.jsx';
 import Search from './components/Search.jsx';
 
+//
+import { connect } from 'react-redux';
+import { fetchReviews } from './actions/reviewActions.jsx';
+//
+
 
 const Body = styled.div`
 font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
@@ -63,14 +68,17 @@ class ReviewsModule extends React.Component {
   constructor(props) {
     super(props);
     this.reviews = React.createRef();
-    this.state = {
-      data: [],
-      searchBool: false,
-    };
+    // this.state = {
+    //   data: [],
+    //   searchBool: false,
+    // };
   }
 
+  
   componentDidMount() {
-    this.renderView();
+  // componentWillMount() {
+    // this.renderView();
+    this.props.fetchReviews();
   }
 
   handleSearchChange(e) {
@@ -105,64 +113,64 @@ class ReviewsModule extends React.Component {
     }
   }
 
-  renderView() {
-    let url = 'http://localhost:3004/api/reviews';
-    // let url = 'http://52.52.189.97/api/reviews';
-    if (window.location.pathname.length > 1) {
-      url += window.location.pathname;
-    }
-    ajax({
-      url,
-      method: 'GET',
-      success: (data) => {
-        const result = data[0];
-        const length = result.length;
+  // renderView() {
+  //   let url = 'http://localhost:3004/api/reviews';
+  //   // let url = 'http://52.52.189.97/api/reviews';
+  //   if (window.location.pathname.length > 1) {
+  //     url += window.location.pathname;
+  //   }
+  //   ajax({
+  //     url,
+  //     method: 'GET',
+  //     success: (data) => {
+  //       const result = data[0];
+  //       const length = result.length;
 
-        // rating, cleanliness, communication, checkin, accuracy, location, value
-        let ratings = [0, 0, 0, 0, 0, 0, 0];
-        // spaCle, quiRes, stySpa, outHos, amaAme
-        let hearts = [0, 0, 0, 0, 0];
+  //       // rating, cleanliness, communication, checkin, accuracy, location, value
+  //       let ratings = [0, 0, 0, 0, 0, 0, 0];
+  //       // spaCle, quiRes, stySpa, outHos, amaAme
+  //       let hearts = [0, 0, 0, 0, 0];
 
-        for (let i = 0; i < length; i += 1) {
-          ratings[0] += result[i].rating;
-          ratings[1] += result[i].cleanliness;
-          ratings[2] += result[i].communication;
-          ratings[3] += result[i].checkin;
-          ratings[4] += result[i].accuracy;
-          ratings[5] += result[i].location;
-          ratings[6] += result[i].value;
-          if (result[i].spaCle === 1) {
-            hearts[0] += 1;
-          }
-          if (result[i].quiRes === 1) {
-            hearts[1] += 1;
-          }
-          if (result[i].stySpa === 1) {
-            hearts[2] += 1;
-          }
-          if (result[i].outHos === 1) {
-            hearts[3] += 1;
-          }
-          if (result[i].amaAme === 1) {
-            hearts[4] += 1;
-          }
-        }
+  //       for (let i = 0; i < length; i += 1) {
+  //         ratings[0] += result[i].rating;
+  //         ratings[1] += result[i].cleanliness;
+  //         ratings[2] += result[i].communication;
+  //         ratings[3] += result[i].checkin;
+  //         ratings[4] += result[i].accuracy;
+  //         ratings[5] += result[i].location;
+  //         ratings[6] += result[i].value;
+  //         if (result[i].spaCle === 1) {
+  //           hearts[0] += 1;
+  //         }
+  //         if (result[i].quiRes === 1) {
+  //           hearts[1] += 1;
+  //         }
+  //         if (result[i].stySpa === 1) {
+  //           hearts[2] += 1;
+  //         }
+  //         if (result[i].outHos === 1) {
+  //           hearts[3] += 1;
+  //         }
+  //         if (result[i].amaAme === 1) {
+  //           hearts[4] += 1;
+  //         }
+  //       }
 
-        this.setState({
-          data: data[0],
-          staticData: {
-            ratings: ratings.map((x, i) => {
-              if (i === 0) {
-                return (x / length).toFixed(2);
-              }
-              return (x / length).toFixed(1);
-            }),
-            hearts,
-          },
-        });
-      },
-    });
-  }
+  //       this.setState({
+  //         data: data[0],
+  //         staticData: {
+  //           ratings: ratings.map((x, i) => {
+  //             if (i === 0) {
+  //               return (x / length).toFixed(2);
+  //             }
+  //             return (x / length).toFixed(1);
+  //           }),
+  //           hearts,
+  //         },
+  //       });
+  //     },
+  //   });
+  // }
 
   render() {
     if (!this.state.staticData) {
@@ -203,4 +211,6 @@ class ReviewsModule extends React.Component {
   }
 }
 
-export default ReviewsModule;
+// export default ReviewsModule;
+
+export default connect(null, { fetchReviews })(ReviewsModule);
