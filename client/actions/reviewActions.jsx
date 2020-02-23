@@ -67,7 +67,6 @@ export const fetchReviews = () => dispatch => {
             hearts[4] += 1;
           }
         }
-
         let reviews = [
             data[0],
             {
