@@ -75,8 +75,8 @@ class ReviewsModule extends React.Component {
   }
 
   
-  componentDidMount() {
-  // componentWillMount() {
+  // componentDidMount() {
+  componentWillMount() {
     // this.renderView();
     this.props.fetchReviews();
   }
@@ -85,11 +85,11 @@ class ReviewsModule extends React.Component {
     e.preventDefault();
     const inValid = /^\s+$/;
     const k = inValid.test(e.target[0].value);
-    if (!this.state.searchBool && (e.target[0].value.length > 0) && (!k)) {
+    if (!this.props.searchBool && (e.target[0].value.length > 0) && (!k)) {
       window.scroll({ top: 1440, left: 0, behavior: 'smooth' });
-      const originalList = this.state.data.slice();
-      const newList = this.state.data.filter(data => data.body.toLowerCase().includes(e.target[0].value.toLowerCase()));
-      const searchBool = this.state.searchBool;
+      const originalList = this.props.reviews[0].slice();
+      const newList = this.props.reviews[0].filter(data => data.body.toLowerCase().includes(e.target[0].value.toLowerCase()));
+      const searchBool = this.props.searchBool;
       this.setState({
         originalList,
         data: newList,
@@ -102,9 +102,9 @@ class ReviewsModule extends React.Component {
 
   handleBackToOriginalList() {
     this.reviews.current.resetSerPageNum();
-    if (this.state.searchBool) {
-      const originalList = this.state.originalList;
-      const searchBool = this.state.searchBool;
+    if (this.props.searchBool) {
+      const originalList = this.props.originalList;
+      const searchBool = this.props.searchBool;
       this.setState({
         data: originalList,
         searchBool: !searchBool,
@@ -173,12 +173,11 @@ class ReviewsModule extends React.Component {
   // }
 
   render() {
-    if (!this.state.staticData) {
+    if (this.props.reviews.length === 0) {
       return (
         <div> </div>
       );
-    }
-    if (this.state.staticData) {
+    } else {
       return (
         <Body>
           <h2>Reviews</h2>
@@ -187,24 +186,24 @@ class ReviewsModule extends React.Component {
             <FlexSpan>
               <FlexRow>
                 <STAR>&#9733;</STAR>
-                {this.state.staticData.ratings[0]} 
+                {this.props.reviews[1].ratings[0]} 
               </FlexRow>
             </FlexSpan>
             <VerLine />
-            <div>{this.state.searchBool ? this.state.originalList.length : this.state.data.length} reviews</div>
+            <div>{this.props.searchBool ? this.props.originalList.length : this.props.reviews[0].length} reviews</div>
           </ReviewsHeader>
 
-          {this.state.searchBool ? (<div />) : (
+          {this.props.searchBool ? (<div />) : (
             <Container>
-              <StaticRating staticData={this.state.staticData} />
+              <StaticRating staticData={this.props.reviews[1]} />
               <HorLine />
-              <StaticVote staticData={this.state.staticData} />
+              <StaticVote staticData={this.props.reviews[1]} />
             </Container>
           )}
 
-          <Search state={this.state} handleSearchChange={this.handleSearchChange.bind(this)} handleBackToOriginalList={this.handleBackToOriginalList.bind(this)}/>
+          <Search state={this.props} handleSearchChange={this.handleSearchChange.bind(this)} handleBackToOriginalList={this.handleBackToOriginalList.bind(this)}/>
 
-          <Reviews ref={this.reviews} searchBool={this.state.searchBool} data={this.state.data} staticData={this.state.staticData}/>
+          <Reviews ref={this.reviews} searchBool={this.props.searchBool} data={this.props.reviews[0]} staticData={this.props.reviews[1]}/>
         </Body>
       );
     }
@@ -213,4 +212,8 @@ class ReviewsModule extends React.Component {
 
 // export default ReviewsModule;
 
-export default connect(null, { fetchReviews })(ReviewsModule);
+const mapStateToProps = state => ({
+  reviews: state.reviews.data,
+});
+
+export default connect(mapStateToProps, { fetchReviews })(ReviewsModule);

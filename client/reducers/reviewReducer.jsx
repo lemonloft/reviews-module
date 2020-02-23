@@ -8,10 +8,10 @@ const initialState = {
 export default function(state = initialState, action) {
     switch(action.type) {
         case FETCH_REVIEWS:
+        console.log('reducer');
             return {
                 ...state,
-                data: action.payload[0],
-                staticData: action.payload[1]
+                data: action.payload,
             }
         default:
             return state;
