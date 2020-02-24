@@ -2,7 +2,6 @@ import { FETCH_REVIEWS } from '../actions/types.jsx';
 
 const initialState = {
     data: [],
-    staticData: {},
 }
 
 export default function(state = initialState, action) {
