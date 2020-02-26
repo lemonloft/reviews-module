@@ -2,7 +2,6 @@ import { FETCH_REVIEWS } from './types.jsx';
 import { ajax } from 'jquery';
 
 export const fetchReviews = () => dispatch => {
-    console.log('fetching');
     let url = 'http://localhost:3004/api/reviews';
     // let url = 'http://52.52.189.97/api/reviews';
     if (window.location.pathname.length > 1) {
