@@ -9,6 +9,7 @@ import Search from './components/Search.jsx';
 //
 import { connect } from 'react-redux';
 import { fetchReviews } from './actions/reviewActions.jsx';
+import { changeSearchBool } from './actions/searchBoolActions.jsx';
 //
 
 
@@ -153,6 +154,7 @@ class ReviewsModule extends React.Component {
 
 const mapStateToProps = state => ({
   reviews: state.reviews.data,
+  searchBool: state.searchBool.searchBool,
 });
 
-export default connect(mapStateToProps, { fetchReviews })(ReviewsModule);
+export default connect(mapStateToProps, { fetchReviews, changeSearchBool })(ReviewsModule);
