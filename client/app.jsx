@@ -76,8 +76,8 @@ class ReviewsModule extends React.Component {
   }
 
   
-  // componentDidMount() {
-  componentWillMount() {
+  componentDidMount() {
+  // componentWillMount() {
     // this.renderView();
     this.props.fetchReviews();
   }
