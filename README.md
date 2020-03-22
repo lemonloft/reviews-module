@@ -2,7 +2,12 @@
 
 Microservice focused on frontend functionality and appearance.
 
-Screen capture demonstrating some of the functionality:
+## Related Projects
+  - https://github.com/lemonloft/reservation-module
+  - https://github.com/lemonloft/photo-gallery-module
+  - https://github.com/lemonloft/photo-gallery-module-gs
+
+## Screen capture demonstrating some of the functionality:
 
 ![Imgur Image](./reviews_demo.gif)
 
