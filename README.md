@@ -7,7 +7,7 @@ Microservice focused on frontend functionality and appearance.
   - https://github.com/lemonloft/photo-gallery-module
   - https://github.com/lemonloft/photo-gallery-module-gs
 
-## Screen capture demonstrating some of the functionality:
+## Screen Capture
 
 ![Imgur Image](./reviews_demo.gif)
 
