@@ -1,5 +1,4 @@
 import React from 'react';
-import { ajax } from 'jquery';
 import styled from 'styled-components';
 import Reviews from './components/Reviews.jsx';
 import StaticRating from './components/StaticRating.jsx';
@@ -69,16 +68,10 @@ class ReviewsModule extends React.Component {
   constructor(props) {
     super(props);
     this.reviews = React.createRef();
-    // this.state = {
-    //   data: [],
-    //   searchBool: false,
-    // };
   }
 
   
   componentDidMount() {
-  // componentWillMount() {
-    // this.renderView();
     this.props.fetchReviews();
   }
 
